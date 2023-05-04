@@ -1,0 +1,28 @@
+Host bastion
+  Hostname <bastion-public-ip>
+  User ubuntu
+  IdentityFile <path-to-ssh-key>
+
+Host devA
+  Hostname <devA-private-ip>
+  User ubuntu
+  IdentityFile <path-to-ssh-key>
+  ProxyJump bastion
+
+Host devB
+  Hostname <devB-private-ip>
+  User ubuntu
+  IdentityFile <path-to-ssh-key>
+  ProxyJump bastion
+
+Host devC
+  Hostname <devC-private-ip>
+  User ubuntu
+  IdentityFile <path-to-ssh-key>
+  ProxyJump bastion
+
+Host haproxy
+  Hostname <haproxy-public-ip>
+  User ubuntu
+  IdentityFile <path-to-ssh-key>
+  ProxyJump bastion
