@@ -1,10 +1,15 @@
-[HAproxy]  
-HAproxy 
-[webservers]  
-devA  
-devB  
-devC  
- 
-[all:vars]  
-ansible_user=ubuntu  
-##REMOVED sshkey entry, handled by external SSH config file ## 
+[HAproxy]
+haproxy ansible_host=<haproxy-public-ip>
+
+[webservers]
+devA ansible_host=<devA-private-ip>
+devB ansible_host=<devB-private-ip>
+devC ansible_host=<devC-private-ip>
+
+[Bastion]
+bastion ansible_host=<bastion-public-ip>
+
+[all:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=/path/to/ssh/key
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ubuntu@{{ bastion }}"'
